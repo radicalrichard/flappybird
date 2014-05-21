@@ -10,10 +10,23 @@ a {
 }
 
 #bird{
-    height: 10px;
-    width: 10px;
-    background-color: #F00;
-    position: absolute;
-    left: 100px;
-    top: 100px;
+  height: 20px;
+  width: 20px;
+  background-color: #F00;
+  position: absolute;
+  left: 20%;
+  top: 40%;
+}
+
+#baddie{
+  position: absolute;
+  width: 10%;
+  height: 40%;
+  background-color: #F00;
+}
+
+#score{
+  position: fixed;
+  left: 15px;
+  top: 15px;
 }
