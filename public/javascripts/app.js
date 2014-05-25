@@ -5,8 +5,6 @@ var $window = $(window),
 function render(){
     var y = parseInt($bird.css('top')),
         ground = parseInt($window.height())
-    updateBaddies()
-		this.player.update()
 
     $bird.css({top:"+=1"})
 
