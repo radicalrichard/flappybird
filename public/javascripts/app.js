@@ -1,7 +1,10 @@
 
 var $window = $(window),
-    $bird = $("#bird");
+    $bird = $("#bird"),
+    $baddie = $("#baddie");
 
+
+//RENDER
 function render(){
     var y = parseInt($bird.css('top')),
         ground = parseInt($window.height())
@@ -23,7 +26,6 @@ $(document).on("keydown", function(e){
     }
 });
 
-// Animation Frame
 function stopRender(){
     console.log('Stopping Render');
     cancelAnimationFrame(frameId);
@@ -34,6 +36,7 @@ function startRender(){
     animloop();
 };
 
+// Animation Frame
 window.requestAnimFrame = (function(){
   return  window.requestAnimationFrame       ||
           window.webkitRequestAnimationFrame ||

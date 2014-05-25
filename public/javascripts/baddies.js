@@ -1,10 +1,10 @@
 
 var Baddie = function(){
-	this.x = Math.floor(Math.random() * ($(window).width() + 1))
-	this.y = -100
+	this.x = 100
+	this.y = Math.floor(Math.random() * ($(window).height() + 1))
 	this.width = 100
 	this.height = 100
-	this.speed = Math.floor(Math.random() * 11) + 5
+	this.speed = Math.floor(Math.random() * 2) + 5
 	this.$el = $('<div>').addClass('baddie').css({
 		left: this.x,
 		top: this.y
@@ -13,4 +13,8 @@ var Baddie = function(){
 	this.death = function(){
 		this.$el.remove();
 	}
+}
+
+Baddie.prototype.update = function(){
+	this.$el.css({left: this.x, top: this.y})
 }

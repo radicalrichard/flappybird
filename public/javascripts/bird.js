@@ -1,5 +1,4 @@
 var Bird = function(){
-	this.maxspeed = 20
 	this.dx = 0
 	this.dy = 0
 	this.accel = 0.5
