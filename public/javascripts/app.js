@@ -1,15 +1,28 @@
 
 var $window = $(window),
     $bird = $("#bird"),
-    $baddie = $("#baddie");
+    baddies = [],
+    lastBaddie = Date.now()
 
+baddies.push(new Baddie());
 
-//RENDER
+//RENDER fns
 function render(){
     var y = parseInt($bird.css('top')),
         ground = parseInt($window.height())
 
+
+    for (var i=0; i < baddies.length; i++) {
+      var baddie = baddies[i];
+      baddie.update();
+    }
+
     $bird.css({top:"+=1"})
+    if((Date.now() - lastBaddie) > 500){
+      baddies.push(new Baddie());
+      lastBaddie = Date.now()
+    }
+
 
     //check in bounds
     if( y > ground ){
@@ -17,14 +30,6 @@ function render(){
         stopRender();
     }
 };
-
-//CONTROLS
-$(document).on("keydown", function(e){
-    var key = e.which
-    if(key == 32){
-        $bird.css({top:"-=30"})
-    }
-});
 
 function stopRender(){
     console.log('Stopping Render');
@@ -34,7 +39,18 @@ function stopRender(){
 function startRender(){
     console.log('Starting Render');
     animloop();
-};
+}; //end RENDER fns
+
+//CONTROLS
+$(document).on("keydown", function(e){
+    var key = e.which
+    if(key == 32){
+      $bird.css({top:"-=30"})
+    }
+    if(key == 80){
+      stopRender();
+    } // hit P to stoprender
+});
 
 // Animation Frame
 window.requestAnimFrame = (function(){

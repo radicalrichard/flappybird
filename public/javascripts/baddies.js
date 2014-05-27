@@ -1,20 +1,20 @@
 
 var Baddie = function(){
-	this.x = 100
-	this.y = Math.floor(Math.random() * ($(window).height() + 1))
-	this.width = 100
-	this.height = 100
-	this.speed = Math.floor(Math.random() * 2) + 5
-	this.$el = $('<div>').addClass('baddie').css({
-		left: this.x,
-		top: this.y
-	}).appendTo($('#body'))
+	this.x = $(window).width()
+	//this.y = Math.floor(Math.random() * ($(window).height() + 1))
 
-	this.death = function(){
-		this.$el.remove();
-	}
+	// Round down ( percentage of window height )
+	this.height = Math.floor(Math.random() * ($(window).height() + 1));
+	this.$el = $('<div class="baddie"></div>');
+	this.$el.height(this.height);
+	$('body').append(this.$el);
 }
 
 Baddie.prototype.update = function(){
-	this.$el.css({left: this.x, top: this.y})
+	this.x -= ($(window).width() * 0.01)
+	if(this.x < this.$el.width() * -1){
+		this.$el.remove()
+	} else {
+		this.$el.css({left: this.x})
+	}
 }
