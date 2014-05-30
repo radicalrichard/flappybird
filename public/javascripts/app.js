@@ -1,10 +1,9 @@
 
-var $window = $(window),
+var $window = $('#game'),
     $bird = $("#bird"),
     baddies = [],
-    lastBaddie = Date.now()
-
-baddies.push(new Baddie());
+    lastBaddie = Date.now(),
+    paused = true;
 
 //RENDER fns
 function render(){
@@ -17,9 +16,12 @@ function render(){
       baddie.update();
     }
 
-    $bird.css({top:"+=1"})
-    if((Date.now() - lastBaddie) > 500){
-      baddies.push(new Baddie());
+    if(!$bird.hasClass('flap')){
+        $bird.css({top:"+=5"})
+    }
+
+    if((Date.now() - lastBaddie) > 3000){
+      MakeBaddieWave();
       lastBaddie = Date.now()
     }
 
@@ -34,21 +36,30 @@ function render(){
 function stopRender(){
     console.log('Stopping Render');
     cancelAnimationFrame(frameId);
+    paused = true;
 };
 
 function startRender(){
     console.log('Starting Render');
     animloop();
+    paused = false;
 }; //end RENDER fns
 
 //CONTROLS
 $(document).on("keydown", function(e){
     var key = e.which
     if(key == 32){
-      $bird.css({top:"-=30"})
+      $bird.css({top:"-=100"}).addClass('flap');
+      setTimeout(function(){
+        $bird.removeClass('flap');
+      }, 60)
     }
     if(key == 80){
-      stopRender();
+      if(paused) {
+          startRender();
+      } else {
+          stopRender();
+      }
     } // hit P to stoprender
 });
 
