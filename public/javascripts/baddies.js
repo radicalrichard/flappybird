@@ -54,6 +54,7 @@ Baddie.prototype.update = function(){
 	this.x -= ($window.width() * 0.005);
 	if(this.x < this.$el.width() * -1){
 		this.$el.remove();
+
 	} else {
 		this.$el.css({left: this.x});
 	}
@@ -69,13 +70,6 @@ Baddie.prototype.collision = function(){
      (this.y + this.height) < ($bird.offset().top)  ||
      this.y > ($bird.offset().top + $bird.height()) ||
      (this.x + this.width) < $bird.offset().left    ||
-     this.x > ($bird.offset().left + $bird.width())
+     this.x > ($bird.offset().left)
   );
 };
-
-// Baddie.prototype.collision = function(){
-// if (this.x < this.x + $bird.offset().left		 &&
-// 		this.x + $bird.offset().left  > this.x		&&
-// 		this.y < $bird.offset().top + this.height &&
-// 		$bird.offset().top + this.height > this.y);
-// };
