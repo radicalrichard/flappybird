@@ -1,14 +1,17 @@
+DEFAULT_DX = 0;
 
 var $window = $('#game'),
     $bird = $("#bird"),
     baddies = [],
     lastBaddie = Date.now(),
-    paused = true;
+    paused = true,
+    dy = DEFAULT_DX,
+    velocity = 0;
 
 //RENDER fns
 function render(){
     var y = parseInt($bird.css('top')),
-        ground = parseInt($window.height())
+        ground = parseInt($window.height());
 
 
     for (var i=0; i < baddies.length; i++) {
@@ -17,12 +20,14 @@ function render(){
     }
 
     if(!$bird.hasClass('flap')){
-        $bird.css({top:"+=5"})
+        velocity += dy;
+        $bird.css({top:"+=" + velocity});
+        dy += 0.025;
     }
 
     if((Date.now() - lastBaddie) > 3000){
       MakeBaddieWave();
-      lastBaddie = Date.now()
+      lastBaddie = Date.now();
     }
 
 
@@ -31,28 +36,30 @@ function render(){
         console.log("DIED");
         stopRender();
     }
-};
+}
 
 function stopRender(){
     console.log('Stopping Render');
     cancelAnimationFrame(frameId);
     paused = true;
-};
+}
 
 function startRender(){
     console.log('Starting Render');
     animloop();
     paused = false;
-}; //end RENDER fns
+} //end RENDER fns
 
 //CONTROLS
 $(document).on("keydown", function(e){
-    var key = e.which
+    var key = e.which;
     if(key == 32){
       $bird.css({top:"-=100"}).addClass('flap');
+      velocity = 0;
+      dy = DEFAULT_DX;
       setTimeout(function(){
         $bird.removeClass('flap');
-      }, 60)
+      }, 60);
     }
     if(key == 80){
       if(paused) {
@@ -76,7 +83,7 @@ window.requestAnimFrame = (function(){
 function animloop(){
   window.frameId = requestAnimFrame(animloop);
   render();
-};
+}
 
 //DOCRDY
 $(function(){
