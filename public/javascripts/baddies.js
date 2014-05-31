@@ -54,6 +54,7 @@ Baddie.prototype.update = function(){
 	this.x -= ($window.width() * 0.005);
 	if(this.x < this.$el.width() * -1){
 		this.$el.remove();
+		updateCounter();
 
 	} else {
 		this.$el.css({left: this.x});

@@ -6,6 +6,7 @@ var $window = $('#game'),
     lastBaddie = Date.now(),
     paused = true,
     dy = DEFAULT_DX,
+    ticks = 0,
     velocity = 0;
 
 //RENDER fns
@@ -49,6 +50,14 @@ function startRender(){
     animloop();
     paused = false;
 } //end RENDER fns
+
+// SCORE
+function updateCounter(){
+  ticks++;
+  if(ticks % 25 === 0){
+    $('#score').text(parseInt($('#score').text())+1 );
+  }
+}
 
 //CONTROLS
 $(document).on("keydown", function(e){
