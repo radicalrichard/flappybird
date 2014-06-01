@@ -8,7 +8,6 @@ var MakeBaddieWave = function(){
 
 	// pick set
 	var height = positions[Math.floor(Math.random() * positions.length)];
-
 	// spawn baddie top
 	baddies.push(new Baddie('top', height[0]));
 	// spawn baddie bottom
@@ -30,15 +29,12 @@ var Baddie = function(position, height){
 		this.$el.css({top: '0px'});
 	}
 
-
 	// Draw new element
 	$window.append(this.$el);
-
 	this.width = this.width;
 	this.height = parseInt(this.$el.css('height'));
 	this.y = this.$el.offset().top;
 	console.log(this.x, this.y, this.width, this.height);
-
 };
 
 function randomheight(){
@@ -65,8 +61,8 @@ Baddie.prototype.update = function(){
 };
 
 Baddie.prototype.collision = function(){
-	console.log(this.x, this.y, this.width, this.height);
-	console.log($bird.offset().left, $bird.offset().top);
+	//console.log(this.x, this.y, this.width, this.height);
+	//console.log($bird.offset().left, $bird.offset().top);
   return !(
      (this.y + this.height) < ($bird.offset().top)  ||
      this.y > ($bird.offset().top + $bird.height()) ||

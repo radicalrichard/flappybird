@@ -20,17 +20,18 @@ function render(){
       baddie.update();
     }
 
+    //Velocity on flap
     if(!$bird.hasClass('flap')){
         velocity += dy;
         $bird.css({top:"+=" + velocity});
         dy += 0.025;
     }
 
+    //Spawn a new baddie every 3 sec
     if((Date.now() - lastBaddie) > 3000){
       MakeBaddieWave();
       lastBaddie = Date.now();
     }
-
 
     //check in bounds
     if( y > ground ){
@@ -96,5 +97,5 @@ function animloop(){
 
 //DOCRDY
 $(function(){
-  startRender();
+  
 });
