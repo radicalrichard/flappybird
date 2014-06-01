@@ -49,6 +49,7 @@ Baddie.prototype.update = function(){
 	// moves baddie left 1% of window width
 	this.x -= ($window.width() * 0.005);
 	if(this.x < this.$el.width() * -1){
+		baddies.shift();
 		this.$el.remove();
 		updateCounter();
 
@@ -57,6 +58,7 @@ Baddie.prototype.update = function(){
 	}
 	if(this.collision()){
 		stopRender();
+		ded();
 	}
 };
 
