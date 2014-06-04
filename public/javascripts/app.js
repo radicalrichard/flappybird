@@ -9,7 +9,9 @@ var $window = $('#game'),
     velocity = 0,
     baddiesCleared = 0,
     score = 0,
-    $score = $('#score');
+    $score = $('#score'),
+    topscore = 0,
+    $topscore = $('#topscore');
 
 //RENDER fns
 function render(){
@@ -56,12 +58,14 @@ function startRender(){
     toggleMenu();
 } //end RENDER fns
 
+//Resets on player death
 function ded(){
+  checkTopScore();
   baddies = [];
   $('.baddie').remove();
   score = 0;
   $bird.css({top: '30%'});
-  $score.text('0');
+  $score.text('Score: 0');
   dy = DEFAULT_DX;
   velocity = 0;
   baddiesCleared = 0;
@@ -72,9 +76,15 @@ function updateCounter(){
   baddiesCleared++;
   if(baddiesCleared % 2 === 0) {
     score++;
-    $score.text(score);
+    $score.text('Score: ' + score);
   }
 }
+
+function checkTopScore () {
+  if(score > topscore) {
+    $topscore.text('Best: ' + score);
+  }
+} // End score functions
 
 //toggle menu
 function toggleMenu(){
