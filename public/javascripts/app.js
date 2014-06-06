@@ -64,8 +64,8 @@ function ded(){
   baddies = [];
   $('.baddie').remove();
   score = 0;
+  $score.text('Score: ' + score);
   $bird.css({top: '30%'});
-  $score.text('Score: 0');
   dy = DEFAULT_DX;
   velocity = 0;
   baddiesCleared = 0;
@@ -99,7 +99,8 @@ function toggleMenu(){
 $(document).on("keydown", function(e){
     var key = e.which;
     if((key == 32) && !paused){
-      $bird.css({top:"-=100"}).addClass('flap');
+      //normal value 100, 50 for testing
+      $bird.css({top:"-=50"}).addClass('flap');
       velocity = 0;
       dy = DEFAULT_DX;
       setTimeout(function(){
