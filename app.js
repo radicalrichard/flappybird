@@ -9,6 +9,12 @@ var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
 
+var mongoose = require('mongoose');
+var mongoUrl = process.env.MONGOHQ_URL || 'mongodb://localhost/flappy-scores';
+mongoose.connect(mongoUrl);
+
+var Score = require(__dirname + '/models/score');
+
 var app = express();
 
 // all environments
@@ -30,8 +36,30 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
+app.get('/scores', function(req, res){
+  var score = Score
+              .find({})
+              .sort('-score')
+              .limit(20)
+              .select('name score')
+              .exec(function(err, scores){
+    res.json(scores);
+  });
+});
+
+app.post('/scores', function(req, res){
+  var score = new Score({
+    name: req.body.name,
+    score: req.body.score
+  });
+  score.save(function (err, score) {
+    if (err) return handleError(err);
+    res.json(score);
+  });
+});
+
 app.get('/', routes.index);
-app.get('/users', user.list);
+
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

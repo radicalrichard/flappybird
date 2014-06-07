@@ -85,6 +85,7 @@ function checkTopScore () {
   if(score > topscore) {
     topscore = score;
     $topscore.text('Best: ' + score);
+    postScore(topscore);
   }
 } // End score functions
 
@@ -95,6 +96,31 @@ function toggleMenu(){
   } else {
     $("#game").removeClass('paused');
   }
+}
+
+function postScore(topscore) {
+  $.ajax({
+    type:'post',
+    url: '/scores',
+    data: {
+      score: topscore
+    }
+  }).done(function(data){
+    getScores();
+  });
+}
+
+function getScores(){
+  var $scores = $('#scores').empty();
+
+  $.getJSON('/scores', function(scores){
+    for (var i = 0; i < scores.length; i++) {
+      var $name = $('<dt>').html(scores[i].name),
+          $score = $('<dd>').html(scores[i].score);
+
+      $scores.append($name).append($score);
+    }
+  });
 }
 
 //CONTROLS
