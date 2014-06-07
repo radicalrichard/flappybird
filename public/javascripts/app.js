@@ -18,20 +18,20 @@ function render(){
     var y = parseInt($bird.css('top')),
         ground = parseInt($window.height());
 
-
+    // Update Baddies
     for (var i=0; i < baddies.length; i++) {
       var baddie = baddies[i];
       baddie.update();
     }
 
-    //Velocity on flap
+    // Apply gravity if not flapping
     if(!$bird.hasClass('flap')){
         velocity += dy;
         $bird.css({top:"+=" + velocity});
         dy += 0.025;
     }
 
-    //Spawn a new baddie every 3 sec
+    // Spawn a new baddie every 3 sec
     if((Date.now() - lastBaddie) > 3000){
       MakeBaddieWave();
       lastBaddie = Date.now();
@@ -40,7 +40,7 @@ function render(){
     //check in bounds
     if( y > ground ){
         console.log("DIED");
-        stopRender();
+        ded();
     }
 }
 
@@ -60,6 +60,7 @@ function startRender(){
 
 //Resets on player death
 function ded(){
+  stopRender();
   checkTopScore();
   baddies = [];
   $('.baddie').remove();
@@ -82,6 +83,7 @@ function updateCounter(){
 
 function checkTopScore () {
   if(score > topscore) {
+    topscore = score;
     $topscore.text('Best: ' + score);
   }
 } // End score functions

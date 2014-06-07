@@ -57,7 +57,6 @@ Baddie.prototype.update = function(){
 		this.$el.css({left: this.x});
 	}
 	if(this.collision()){
-		stopRender();
 		ded();
 	}
 };
