@@ -13,6 +13,7 @@ var mongoose = require('mongoose');
 var mongoUrl = process.env.MONGOHQ_URL || 'mongodb://localhost/flappy-scores';
 mongoose.connect(mongoUrl);
 
+var Room = require(__dirname + '/models/room');
 var Score = require(__dirname + '/models/score');
 
 var app = express();

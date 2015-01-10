@@ -11,7 +11,7 @@ var schema = new mongoose.Schema({
   }
 });
 
-var Score = mongoose.model('Score', schema);
 
+var Score = mongoose.model('Score', schema);
 
 module.exports = Score;

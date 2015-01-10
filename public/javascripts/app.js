@@ -87,7 +87,7 @@ function checkTopScore () {
     $topscore.text('Best: ' + score);
     postScore(topscore);
   }
-} // End score functions
+} 
 
 //toggle menu
 function toggleMenu(){
@@ -111,17 +111,17 @@ function postScore(topscore) {
 }
 
 function getScores(){
-  var $scores = $('#scores').empty();
+  var $scores = $('#post').empty();
 
   $.getJSON('/scores', function(scores){
     for (var i = 0; i < scores.length; i++) {
-      var $name = $('<dt>').html(scores[i].name),
-          $score = $('<dd>').html(scores[i].score);
+      var $score = $('<dd>').html(scores[i].score);
+      //$name = $('<dt>').html(scores[i].name)
 
-      $scores.append($name).append($score);
+      $scores.append(Date.now).append($score);
     }
   });
-}
+} // End score functions
 
 //CONTROLS
 $(document).on("keydown", function(e){

@@ -3,6 +3,45 @@
 body {
   padding: 50px;
   font-family: 'Anton', sans-serif;
+  background-color: grey;
+}
+
+#wrap{
+  position: relative;
+  height: 550px;
+  width: 700px;
+  margin-right: auto;
+  margin-left: auto;
+
+}
+
+#post{
+  position: absolute;
+  height: 350px;
+  width: 150px;
+  border: 5px solid black;
+  background-color: lightgreen;
+  overflow: hidden;
+  z-index: 2;
+  margin-left: 450px;
+  text-align: center;
+}
+
+#info{
+  position: absolute;
+  height: 100px;
+  width: 150px;
+  border: 5px solid black;
+  background-color: lightgreen;
+  margin-left: 450px;
+  margin-top: 400px;
+  font-size: 15px;
+  text-align: center;
+}
+
+#info p{
+  position: relative;
+  margin-top: 20px;
 }
 
 #game{
@@ -10,6 +49,7 @@ body {
   position: absolute;
   height: 500px;
   width: 400px;
+  background-image: url("/images/FB_BG_big.gif");
   background-color: rgb(112, 197, 206);
   overflow: hidden;
 }
