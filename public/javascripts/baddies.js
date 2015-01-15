@@ -34,7 +34,7 @@ var Baddie = function(position, height){
 	this.width = this.width;
 	this.height = parseInt(this.$el.css('height'));
 	this.y = this.$el.offset().top;
-	console.log(this.x, this.y, this.width, this.height);
+	//console.log(this.x, this.y, this.width, this.height);
 };
 
 function randomheight(){
@@ -62,12 +62,22 @@ Baddie.prototype.update = function(){
 };
 
 Baddie.prototype.collision = function(){
-	//console.log(this.x, this.y, this.width, this.height);
-	//console.log($bird.offset().left, $bird.offset().top);
-  return !(
-     (this.y + this.height) < ($bird.offset().top)  ||
-     this.y > ($bird.offset().top + $bird.height()) ||
-     (this.x + this.width) < $bird.offset().left    ||
-     this.x > ($bird.offset().left)
+	var birdTop = $bird.offset().top,
+  		birdBottom = birdTop + $bird.height(),
+  		birdLeft = $bird.offset().left,
+  		birdRight = birdLeft + $bird.width();
+
+  var baddieTop = this.y,
+  		baddieBottom = baddieTop + this.height,
+  		baddieLeft = this.x,
+  		baddieRight = baddieLeft + this.width;
+
+  var cantCollide = (
+    baddieBottom < birdTop ||
+    baddieTop > birdBottom ||
+    baddieRight < birdLeft ||
+    baddieLeft > birdLeft
   );
+  
+  return !cantCollide;
 };
