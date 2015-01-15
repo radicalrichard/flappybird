@@ -13,6 +13,7 @@ var mongoose = require('mongoose');
 var mongoUrl = process.env.MONGOHQ_URL || 'mongodb://localhost/flappy-scores';
 mongoose.connect(mongoUrl);
 
+var Room = require(__dirname + '/models/room');
 var Score = require(__dirname + '/models/score');
 
 var app = express();
@@ -40,7 +41,7 @@ app.get('/scores', function(req, res){
   var score = Score
               .find({})
               .sort('-score')
-              .limit(20)
+              .limit(5)
               .select('name score')
               .exec(function(err, scores){
     res.json(scores);
