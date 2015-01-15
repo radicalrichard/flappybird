@@ -65,7 +65,6 @@ function ded(){
   baddies = [];
   $('.baddie').remove();
   score = 0;
-  $score.text('Score: ' + score);
   $bird.css({top: '30%'});
   dy = DEFAULT_DX;
   velocity = 0;
@@ -99,11 +98,14 @@ function toggleMenu(){
 }
 
 function postScore(topscore) {
+  var getName = prompt("Enter your name");
+
   $.ajax({
     type:'post',
     url: '/scores',
     data: {
-      score: topscore
+      score: topscore,
+      name: getName
     }
   }).done(function(data){
     getScores();
@@ -115,10 +117,17 @@ function getScores(){
 
   $.getJSON('/scores', function(scores){
     for (var i = 0; i < scores.length; i++) {
-      var $score = $('<dd>').html(scores[i].score);
-      //$name = $('<dt>').html(scores[i].name)
+      var $score = '<dd>' + scores[i].name + " : " + scores[i].score + '</dd>';
+      // var date = new Date();
+      // var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+      // var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+      // var day = days[date.getDay()];
+      // var month = months[date.getMonth()];
+      // var year = date.getFullYear();
 
-      $scores.append(Date.now).append($score);
+      // //$name = $('<dt>').html(scores[i].name)
+
+      $scores.append($score);
     }
   });
 } // End score functions
@@ -161,5 +170,5 @@ function animloop(){
 
 //DOCRDY
 $(function(){
-
+  getScores();
 });

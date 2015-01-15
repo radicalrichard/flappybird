@@ -41,7 +41,7 @@ app.get('/scores', function(req, res){
   var score = Score
               .find({})
               .sort('-score')
-              .limit(20)
+              .limit(5)
               .select('name score')
               .exec(function(err, scores){
     res.json(scores);
